@@ -5,7 +5,6 @@ export class Board {
         this.size = size;
         this.cards = [];
         this.imagePool = Array.from({ length: 32 }, (_, i) => `img/${i}-min.png`);
-        
         this.generateBoard();
     }
 
@@ -26,16 +25,12 @@ export class Board {
         const gameBoard = document.querySelector('.memory-game');
         gameBoard.innerHTML = '';
 
-        
-        gameBoard.style.gridTemplateColumns = `repeat(${this.size}, 1fr)`;
-        gameBoard.style.gridTemplateRows = `repeat(${this.size}, 1fr)`;
-
         const fragment = document.createDocumentFragment();
 
         shuffledImages.forEach((image) => {
             const card = document.createElement('div');
             card.classList.add('memory-card');
-            card.setAttribute('data-img', image); 
+            card.dataset.img = image;
 
             card.innerHTML = `
                 <img class="front-face" src="${image}" alt="Front face" />
@@ -46,6 +41,8 @@ export class Board {
 
         gameBoard.appendChild(fragment);
 
+        gameBoard.style.gridTemplateColumns = `repeat(${this.size}, 1fr)`;
+        gameBoard.style.gridTemplateRows = `repeat(${this.size}, 1fr)`;
 
         this.cards = document.querySelectorAll('.memory-card');
         return this.cards;

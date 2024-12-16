@@ -13,14 +13,7 @@ export class MemoryGame {
     }
 
     initializeGame() {
-        const gameBoard = document.querySelector('.memory-game');
-        gameBoard.addEventListener('click', (event) => {
-            const clickedCard = event.target.closest('.memory-card');
-            if (!clickedCard || clickedCard.classList.contains('flip')) return;
-            this.flipCard({ currentTarget: clickedCard });
-        });
-        console.log(this.cards.length);
-
+        this.cards.forEach(card => card.addEventListener('click', this.flipCard.bind(this)));
     }
 
     flipCard(event) {
@@ -41,7 +34,7 @@ export class MemoryGame {
     }
 
     checkForMatch() {
-        const isMatch = this.firstCard.getAttribute('data-img') === this.secondCard.getAttribute('data-img');
+        const isMatch = this.firstCard.dataset.img === this.secondCard.dataset.img;
 
         isMatch ? this.disableCards() : this.unflipCards();
 
@@ -52,8 +45,6 @@ export class MemoryGame {
         this.firstCard.removeEventListener('click', this.flipCard.bind(this));
         this.secondCard.removeEventListener('click', this.flipCard.bind(this));
         this.foundCards = this.foundCards + 2;
-        console.log(this.foundCards);
-
         this.resetBoard();
     }
 
@@ -75,9 +66,8 @@ export class MemoryGame {
     }
 
     checkForCompletion() {
-        if (this.foundCards === this.cards.length) {
+        if (this.cards.length === this.foundCards) {
             this.showCompletionImage();
-            console.log("Done");
         }
     }
 
