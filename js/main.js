@@ -90,7 +90,7 @@ class MemoryGame {
 function generateBoard(size) {
     const totalCards = size * size;
     const uniqueImagesCount = totalCards / 2;
-    const imagePool = Array.from({ length: 32 }, (_, i) => `img/${i}.png`);
+    const imagePool = Array.from({ length: 32 }, (_, i) => `img/${i}-min.png`);
 
     const selectedImages = [];
     while (selectedImages.length < uniqueImagesCount) {
