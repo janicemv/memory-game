@@ -9,11 +9,15 @@ export class MemoryGame {
         this.secondCard = null;
         this.foundCards = 0;
 
+        this.getFlipCard = this.flipCard.bind(this);
+
         this.initializeGame();
     }
 
     initializeGame() {
-        this.cards.forEach(card => card.addEventListener('click', this.flipCard.bind(this)));
+        this.cards.forEach(card => card.addEventListener('click', this.getFlipCard));
+        console.log(this.cards.length);
+
     }
 
     flipCard(event) {
@@ -42,9 +46,10 @@ export class MemoryGame {
     }
 
     disableCards() {
-        this.firstCard.removeEventListener('click', this.flipCard.bind(this));
-        this.secondCard.removeEventListener('click', this.flipCard.bind(this));
+        this.firstCard.removeEventListener('click', this.getFlipCard);
+        this.secondCard.removeEventListener('click', this.getFlipCard);
         this.foundCards = this.foundCards + 2;
+        console.log(this.foundCards);
         this.resetBoard();
     }
 
