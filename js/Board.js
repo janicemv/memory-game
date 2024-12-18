@@ -4,7 +4,7 @@ export class Board {
     constructor(size) {
         this.size = size;
         this.cards = [];
-        this.imagePool = Array.from({ length: 32 }, (_, i) => `img/${i}-min.png`);
+        this.imagePool = Array.from({ length: 37 }, (_, i) => `img/${i}.png`);
         this.generateBoard();
     }
 
